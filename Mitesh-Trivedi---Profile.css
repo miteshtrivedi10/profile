@@ -214,6 +214,10 @@
   margin: 28px 0 0;
 }
 
+.u-section-1 .u-btn-5 {
+  padding: 0;
+}
+
 .u-section-1 .u-list-item-6 {
   --animation-custom_in-translate_x: 0px;
   --animation-custom_in-translate_y: 300px;
@@ -245,7 +249,7 @@
   margin: 28px 0 0;
 }
 
-.u-section-1 .u-btn-5 {
+.u-section-1 .u-btn-6 {
   letter-spacing: 1px;
   font-size: 1.125rem;
   align-self: center;
