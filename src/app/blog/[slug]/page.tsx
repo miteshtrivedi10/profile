@@ -1,117 +1,121 @@
 import Image from 'next/image'
 import Nav from '@/components/nav'
+import { notFound } from 'next/navigation'
+
+interface BlogPost {
+  title: string
+  description: string
+  date: string
+  category: string
+  content?: string
+  image: string
+  externalUrl?: string
+}
+
+type BlogPosts = {
+  [key: string]: BlogPost
+}
 
 // This would typically come from a CMS or database
-const post = {
-  title: 'Software Design & Architecture of Merchant Platform (F&B Category)',
-  description: 'A detailed look at the software architecture and design principles behind a merchant platform in the Food & Beverage category, focusing on scalability and maintainability.',
-  date: '2024-01-01',
-  category: 'System Design',
-  author: 'Mitesh Trivedi',
-  content: `
-    A merchant platform in the Food & Beverage category requires careful consideration of various architectural aspects to ensure scalability, reliability, and maintainability. Here's a detailed look at the key components and design decisions:
+const posts: BlogPosts = {
+  'model-context-protocol': {
+    title: 'Model Context Protocol: Real World Use Case',
+    description: 'Exploring the Model Context Protocol pattern with a practical example from the trading industry.',
+    date: '2025-06-21',
+    category: 'MCP Architecture',
+    content: `
+      This article is coming soon! We're working on bringing you an in-depth exploration of the Model Context Protocol pattern with real-world examples from the trading industry.
 
-    ## System Requirements
+      ## What to expect
 
-    1. **Scalability**: The system must handle millions of orders and search requests
-    2. **Performance**: Search operations should complete within 500ms
-    3. **Data Integrity**: No loss of transactional data
-    4. **Real-time Updates**: Live order tracking and notifications
-
-    ## Architecture Components
-
-    ### Frontend Layer
-    - Web and mobile applications
-    - Real-time order tracking interface
-    - Restaurant menu management dashboard
-
-    ### API Layer
-    - RESTful services for CRUD operations
-    - WebSocket connections for real-time updates
-    - GraphQL endpoints for flexible data querying
-
-    ### Service Layer
-    - Order Processing Service
-    - Payment Gateway Integration
-    - Notification Service
-    - Search and Recommendation Engine
-
-    ### Data Layer
-    - PostgreSQL for transactional data
-    - Elasticsearch for menu and search functionality
-    - Redis for caching and real-time data
-    - Kafka for event streaming
-
-    ## Key Design Decisions
-
-    1. **Microservices Architecture**: Enables independent scaling and deployment
-    2. **Event-Driven Design**: Facilitates real-time updates and system decoupling
-    3. **CQRS Pattern**: Separates read and write operations for better performance
-    4. **Domain-Driven Design**: Organizes business logic into bounded contexts
-  `,
-  image: '/blog-cover.jpg',
+      - Detailed explanation of the Model Context Protocol pattern
+      - Real-world implementation in trading systems
+      - Best practices and design considerations
+    `,
+    image: '/mcp-architecture.svg'
+  },
+  'trading-platform': {
+    title: 'Implementing Unique Sequential Trade IDs in a High-Performance Trading Platform',
+    description: 'An in-depth exploration of generating unique, sequential trade IDs in a distributed trading system while maintaining performance and consistency.',
+    date: '2024-02-15',
+    category: 'System Architecture',
+    externalUrl: 'https://medium.com/@miteshtrivedi10/unique-sequential-trade-ids-trading-platform-4bb55161a38d',
+    image: '/trading-platform.svg'
+  },
+  'merchant-platform': {
+    title: 'Software Design & Architecture of Merchant Platform (F&B Category)',
+    description: 'A detailed look at the software architecture and design principles behind a merchant platform in the Food & Beverage category.',
+    date: '2024-01-01',
+    category: 'System Design',
+    externalUrl: 'https://medium.com/@miteshtrivedi10/software-design-architecture-of-merchant-platform-f-b-category-99b666ce5be3',
+    image: '/merchant-platform.svg'
+  }
 }
 
 export function generateStaticParams() {
-  // Define the static paths for your blog posts
-  return [
-    { slug: 'trading-platform' },
-    { slug: 'merchant-platform' }
-  ]
+  return Object.keys(posts).map((slug) => ({ slug }))
 }
 
 export default function BlogPost({ params }: { params: { slug: string } }) {
+  const post = posts[params.slug]
+
+  if (!post) {
+    notFound()
+  }
+
+  // If it's an external post, redirect to the external URL
+  if (post.externalUrl) {
+    // In a static export, we'll show a simple page that redirects to the external URL
+    return (
+      <main>
+        <Nav />
+        <div className="min-h-screen pt-16">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12">
+            <h1 className="text-2xl font-bold mb-4">{post.title}</h1>
+            <p className="mb-4">{post.description}</p>
+            <p>Redirecting to Medium article...</p>
+            <a href={post.externalUrl} 
+               className="text-blue-500 hover:text-blue-600"
+               target="_blank" 
+               rel="noopener noreferrer">
+              Click here if you're not redirected automatically
+            </a>
+            {/* Add client-side redirect */}
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.location.href = "${post.externalUrl}";`,
+              }}
+            />
+          </div>
+        </div>
+      </main>
+    )
+  }
+
   return (
-    <main>
+    <main className="flex min-h-screen flex-col items-center justify-between bg-white dark:bg-gray-900">
       <Nav />
-      <div className="min-h-screen pt-16">
-        <article className="py-16 lg:py-24">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-3xl">
-              <div className="relative isolate">
-                <div className="relative aspect-[2/1] w-full">
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className="absolute inset-0 h-full w-full rounded-2xl bg-gray-100 object-cover"
-                    priority
-                  />
-                  <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
-                </div>
-                <div className="mt-8">
-                  <div className="flex items-center gap-x-4 text-xs">
-                    <time dateTime={post.date} className="text-gray-500">
-                      {new Date(post.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                    </time>
-                    <span className="relative z-10 rounded-full bg-gray-100 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700">
-                      {post.category}
-                    </span>
-                  </div>
-                  <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-                    {post.title}
-                  </h1>
-                  <div className="mt-4 flex items-center gap-x-4">
-                    <div className="text-sm leading-6">
-                      <p className="font-semibold text-gray-900 dark:text-gray-100">
-                        {post.author}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-16 prose prose-lg prose-gray mx-auto dark:prose-invert">
-                {post.content.split('\n\n').map((paragraph, index) => (
-                  <p key={index} className="mb-4">
-                    {paragraph.trim()}
-                  </p>
-                ))}
-              </div>
-            </div>
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12 w-full">
+        <article>
+          <div className="mb-8">
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white antialiased">
+              {post.title}
+            </h1>
+            <p className="mt-4 text-base text-gray-600 dark:text-gray-400">
+              {new Date(post.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </p>
+          </div>
+          
+          <div className="prose prose-lg prose-gray dark:prose-invert">
+            {post.content?.split('\n\n').map((paragraph: string, index: number) => (
+              <p key={index} className="mb-4">
+                {paragraph.trim()}
+              </p>
+            ))}
           </div>
         </article>
       </div>

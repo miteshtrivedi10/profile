@@ -1,5 +1,6 @@
 import { Inter, Roboto_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/theme-provider'
+import MarqueeText from '@/components/marquee-text'
 import './globals.css'
 import type { Metadata } from 'next'
 
@@ -46,14 +47,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${robotoMono.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${robotoMono.variable} font-sans antialiased min-h-screen flex flex-col`}>
+        <MarqueeText />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="flex-1 mt-[2.5rem] sm:mt-[2.75rem]">
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>
