@@ -4,23 +4,22 @@ const nextConfig = {
   swcMinify: true,
   compress: true,
   // Ensure proper asset handling
-  assetPrefix: '',
+  assetPrefix: '/',
   // Enable static optimization
   optimizeFonts: true,
   poweredByHeader: false,
   // Configure output based on environment
-  ...(process.env.NODE_ENV === 'production' ? {
-    output: 'export',
-    images: {
-      unoptimized: true,
-    },
-  } : {
-    // Development configuration
-    reactStrictMode: true,
-    images: {
-      domains: ['localhost'],
-    },
-  }),
+  output: 'export',
+  distDir: 'dist',
+  images: {
+    unoptimized: true,
+  },
+  // Development configuration
+  reactStrictMode: true,
+  images: {
+    domains: ['localhost'],
+  },
+  basePath: '',
 }
 
 module.exports = nextConfig 

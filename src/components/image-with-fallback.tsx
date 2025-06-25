@@ -35,16 +35,31 @@ export default function ImageWithFallback({
     )
   }
 
+  // Use regular img tag for static export
+  if (process.env.NEXT_PUBLIC_STATIC_EXPORT) {
+    return (
+      <img
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        className={className}
+        style={fill ? { objectFit: 'cover', width: '100%', height: '100%', position: 'absolute' } : undefined}
+        onError={() => setError(true)}
+      />
+    )
+  }
+
   return (
     <Image
       src={src}
       alt={alt}
-      width={width}
-      height={height}
-      fill={fill}
+      width={width || 400}
+      height={height || 400}
       className={className}
       priority={priority}
       onError={() => setError(true)}
+      loading={priority ? 'eager' : 'lazy'}
     />
   )
 } 

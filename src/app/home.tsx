@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import Nav from '@/components/nav'
-import ImageWithFallback from '@/components/image-with-fallback'
 import { FaLinkedin, FaGithub, FaEnvelope, FaCertificate } from 'react-icons/fa'
 import { useState, useEffect, useRef } from 'react'
 
@@ -38,27 +37,26 @@ export default function Home() {
   }
 
   return (
-    <main className="home-page h-screen flex flex-col overflow-hidden fixed inset-0">
+    <main className="min-h-screen flex flex-col bg-background">
       <Nav />
-      <div className="flex-1 pt-20 lg:pt-28">
-        {/* Main Content Section */}
-        <div className="mx-auto h-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid h-full grid-cols-1 items-center gap-4 lg:gap-8 lg:grid-cols-2">
+      <div className="flex-1 px-4 py-8 sm:px-6 lg:px-8 mt-[2.5rem] sm:mt-[2.75rem]">
+        <div className="mx-auto max-w-7xl h-full">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-12">
             {/* Left Column - Text Content */}
-            <div className="flex flex-col justify-center max-h-[calc(100vh-12rem)]">
-              <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
+            <div className="flex-1 space-y-6">
+              <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight">
                 Hi, I'm Mitesh Trivedi
               </h1>
-              <p className="mt-6 text-lg text-gray-600 dark:text-gray-400 overflow-y-auto pr-4">
+              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400">
                 Offering 15 years of experience in backend architecture, cloud-native solutions, and scalable system design with a focus on optimizing performance
                 and resource utilization. Experienced in integrating advanced technologies such as Generative AI, distributed systems, and data pipelines to enhance
                 user engagement and operational efficiency. Skilled in leading cross-functional teams and driving development processes to deliver impactful,
                 innovative solutions.
               </p>
-              <div className="mt-8">
+              <div>
                 <Link
                   href="/blog"
-                  className="rounded-lg bg-gray-100 px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-200 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
+                  className="inline-block rounded-lg bg-gray-100 px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-200 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
                 >
                   Read my blog
                 </Link>
@@ -66,24 +64,22 @@ export default function Home() {
             </div>
 
             {/* Right Column - Photo and Contact Links */}
-            <div className="flex flex-col items-center space-y-8 max-h-[calc(100vh-12rem)]">
-              <div className="relative aspect-square w-1/2 overflow-hidden rounded-2xl bg-gray-100 dark:bg-gray-800">
-                <ImageWithFallback
+            <div className="flex flex-col items-center gap-6 lg:gap-8">
+              <div className="relative w-48 sm:w-56 lg:w-64 aspect-square overflow-hidden rounded-2xl bg-gray-100 dark:bg-gray-800">
+                <img
                   src="/profile.jpg"
                   alt="Mitesh Trivedi"
-                  fill
-                  className="object-cover"
-                  priority
+                  className="absolute inset-0 h-full w-full object-cover"
                 />
               </div>
 
               {/* Contact Links */}
-              <div className="grid grid-cols-2 gap-4 w-1/2">
+              <div className="grid grid-cols-2 gap-3 w-48 sm:w-56 lg:w-64">
                 <a
                   href="https://linkedin.com/in/miteshtrivedi"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 transition-colors"
+                  className="flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 transition-colors"
                   aria-label="LinkedIn Profile"
                 >
                   <FaLinkedin className="h-5 w-5 text-[#0A66C2]" />
@@ -93,7 +89,7 @@ export default function Home() {
                   href="https://github.com/miteshtrivedi10"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 transition-colors"
+                  className="flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 transition-colors"
                   aria-label="GitHub Profile"
                 >
                   <FaGithub className="h-5 w-5" />
@@ -103,7 +99,7 @@ export default function Home() {
                   href="https://www.linkedin.com/in/miteshtrivedi/details/certifications/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 transition-colors"
+                  className="flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 transition-colors"
                   aria-label="Credentials"
                 >
                   <FaCertificate className="h-5 w-5 text-[#FFD700]" />
@@ -112,7 +108,7 @@ export default function Home() {
                 <button
                   ref={buttonRef}
                   onClick={handleEmailClick}
-                  className="flex items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 transition-colors group relative"
+                  className="flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 transition-colors group relative"
                   aria-label="Email Address"
                 >
                   <FaEnvelope className="h-5 w-5 text-primary-600" />
