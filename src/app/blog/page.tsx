@@ -51,7 +51,7 @@ export default function Blog() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Blog</h1>
             <p className="mt-2 text-lg text-gray-600 dark:text-gray-400">
-              Insights and experiences from 15 years in backend architecture, cloud-native solutions, and scalable system design. 
+              Insights and experiences in backend architecture, cloud-native solutions, and scalable system design. 
               Sharing knowledge about advanced technologies including Generative AI, distributed systems, and optimizing performance at scale.
             </p>
             <div className="mt-16 space-y-20 lg:mt-20 lg:space-y-20">
