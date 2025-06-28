@@ -51,7 +51,7 @@ export default function Home() {
                 15+ years of experience in backend architecture, cloud-native solutions, and scalable system design with a focus on optimizing performance
                 and resource utilization. Experienced in integrating advanced technologies such as Generative AI, distributed systems, and data pipelines to enhance
                 user engagement and operational efficiency. Skilled in leading cross-functional teams and driving development processes to deliver impactful,
-                innovative solutions.
+                innovative solutions. Worked in different locations - Singapore, Mumbai, Bangalore, and Ahmedabad.
               </p>
               <div className="flex flex-wrap items-center gap-3">
                 <Link
