@@ -1,0 +1,59 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .pulse {
+      animation: pulse 2s infinite;
+      transform-origin: center;
+    }
+
+    .orbit {
+      animation: orbit 6s linear infinite;
+      transform-origin: center;
+    }
+
+    .blink {
+      animation: blink 1.5s step-start infinite;
+    }
+
+    @keyframes pulse {
+      0% { r: 40; opacity: 0.6; }
+      50% { r: 48; opacity: 0.3; }
+      100% { r: 40; opacity: 0.6; }
+    }
+
+    @keyframes orbit {
+      0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.1; }
+    }
+  </style>
+
+  <!-- Background -->
+  <rect width="256" height="256" fill="#0D0D0D" />
+
+  <!-- Pulsing halo -->
+  <circle class="pulse" cx="128" cy="128" r="40" fill="#4A90E2" opacity="0.3" />
+
+  <!-- Central AI Brain -->
+  <path d="M112 112c0-8 8-16 16-16s16 8 16 16v32c0 8-8 16-16 16s-16-8-16-16z"
+        fill="#4A90E2" stroke="#FFFFFF" stroke-width="2" />
+
+  <!-- Orbiting circles -->
+  <g class="orbit">
+    <circle cx="128" cy="128" r="6" fill="#50E3C2" />
+  </g>
+  <g class="orbit" style="animation-delay: 2s;">
+    <circle cx="128" cy="128" r="6" fill="#F5A623" />
+  </g>
+  <g class="orbit" style="animation-delay: 4s;">
+    <circle cx="128" cy="128" r="6" fill="#B8E986" />
+  </g>
+
+  <!-- AI Label -->
+  <text x="128" y="240" text-anchor="middle" font-family="Arial" font-size="18" fill="#FFFFFF" class="blink">
+    AI Agent Frameworks
+  </text>
+</svg>

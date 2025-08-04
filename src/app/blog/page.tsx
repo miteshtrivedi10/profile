@@ -14,6 +14,15 @@ interface Post {
 
 const posts = [
   {
+    id: 'ai-agent-framwork',
+    title: 'Top AI Agentic Frameworks - Production Ready!',
+    description: 'The shift from monolithic AI applications to collaborative multi-agent systems is a defining trend, offering superior flexibility, scalability, and resilience for complex problem-solving.',
+    date: '2025-08-05',
+    category: ['AI Agent Framework', 'LangChain / LangGraph', 'Multi Agent Systems', 'Technology Trends'],
+    image: '/ai-agent-framework.svg',
+    externalUrl: 'https://medium.com/@miteshtrivedi10/top-ai-agent-frameworks-for-production-usage-in-august-2025-and-the-gold-standard-for-future-years-7a2034a44d40'
+  },
+  {
     id: 'model-context-protocol',
     title: 'Model Context Protocol: Real World Use Case',
     description: 'A deep dive into the Model Context Protocol (MCP) - an open standard for connecting AI systems with data sources and tools. Learn how MCP standardizes AI integrations, enables secure tool access, and supports building composable agent architectures.',
@@ -51,7 +60,7 @@ export default function Blog() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Blog</h1>
             <p className="mt-2 text-lg text-gray-600 dark:text-gray-400">
-              Insights and experiences in backend architecture, cloud-native solutions, and scalable system design. 
+              Insights and experiences in backend architecture, cloud-native solutions, and scalable system design.
               Sharing knowledge about advanced technologies including Generative AI, distributed systems, and optimizing performance at scale.
             </p>
             <div className="mt-16 space-y-20 lg:mt-20 lg:space-y-20">
@@ -77,7 +86,7 @@ export default function Blog() {
                       </time>
                       <div className="flex flex-wrap gap-2">
                         {post.category?.map((cat, index) => (
-                          <span 
+                          <span
                             key={index}
                             className="relative z-10 rounded-full bg-gray-100 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
                           >
@@ -89,7 +98,7 @@ export default function Blog() {
                     <div className="group relative max-w-xl">
                       <h3 className="mt-3 text-lg font-semibold leading-6">
                         {post.externalUrl ? (
-                          <a 
+                          <a
                             href={post.externalUrl}
                             target="_blank"
                             rel="noopener noreferrer"
